@@ -14,14 +14,13 @@ defmodule Elixirmixpanel.Router do
 
   # scope "/", Elixirmixpanel do
   #   pipe_through :browser
-
   #   get "/", PageController, :index
   # end
 
   scope "/api", Elixirmixpanel do
     pipe_through :api
 
-    resources "events", EventController, only: [:index, :show, :create, :delete]
-    resources "/users", UserController, only: [:index, :show, :delete]
+    resources "/events", EventController, only: [:index, :show, :create, :delete]
+    resources "/users", UserController, only: [:index, :show, :update, :delete]
   end
 end

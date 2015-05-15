@@ -4,7 +4,7 @@ defmodule Elixirmixpanel.Repo.Migrations.CreateEvent do
   def change do
     create table(:events) do
       add :name, :string
-
+      add :user_id, references(:users)
       timestamps
     end
 

@@ -3,6 +3,7 @@ defmodule Elixirmixpanel.Event do
 
   schema "events" do
     field :name, :string
+    belongs_to :user, Elixirmixpanel.User
 
     timestamps
   end

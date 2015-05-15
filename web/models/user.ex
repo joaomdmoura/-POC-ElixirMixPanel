@@ -4,6 +4,7 @@ defmodule Elixirmixpanel.User do
   schema "users" do
     field :identifier, :string
     field :data, :string
+    has_many :events, Elixirmixpanel.Event
 
     timestamps
   end
