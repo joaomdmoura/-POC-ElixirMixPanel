@@ -12,15 +12,15 @@ defmodule Elixirmixpanel.Router do
     plug :accepts, ["json"]
   end
 
-  # scope "/", Elixirmixpanel do
-  #   pipe_through :browser
-  #   get "/", PageController, :index
-  # end
+  scope "/", Elixirmixpanel do
+    pipe_through :browser
+    get "/", EventController, :index
+  end
 
   scope "/api", Elixirmixpanel do
     pipe_through :api
 
-    resources "/events", EventController, only: [:index, :show, :create, :delete]
-    resources "/users", UserController, only: [:index, :show, :update, :delete]
+    resources "/events", EventController
+    resources "/users", UserController
   end
 end

@@ -11,18 +11,18 @@ defmodule Elixirmixpanel.UserController do
     render(conn, "index.json", users: users)
   end
 
-  # def create(conn, %{"user" => user_params}) do
-  #   changeset = User.changeset(%User{}, user_params)
+  def create(conn, %{"user" => user_params}) do
+    changeset = User.changeset(%User{}, user_params)
 
-  #   if changeset.valid? do
-  #     user = Repo.insert(changeset)
-  #     render(conn, "show.json", user: user)
-  #   else
-  #     conn
-  #     |> put_status(:unprocessable_entity)
-  #     |> render(Elixirmixpanel.ChangesetView, "error.json", changeset: changeset)
-  #   end
-  # end
+    if changeset.valid? do
+      user = Repo.insert(changeset)
+      render(conn, "show.json", user: user)
+    else
+      conn
+      |> put_status(:unprocessable_entity)
+      |> render(Elixirmixpanel.ChangesetView, "error.json", changeset: changeset)
+    end
+  end
 
   def show(conn, %{"id" => id}) do
     user = Repo.get(User, id)
