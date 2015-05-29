@@ -8,7 +8,7 @@ defmodule Elixirmixpanel.EventController do
 
   def index(conn, _params) do
     events = Repo.all(Event)
-    render(conn, "index.json", events: events)
+    render(conn, :index, events: events)
   end
 
   def create(conn, %{"event" => event_params}) do
