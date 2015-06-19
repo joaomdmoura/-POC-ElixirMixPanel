@@ -10,6 +10,6 @@ defmodule Elixirmixpanel.UserView do
   end
 
   def render("user.json", %{user: user}) do
-    %{id: user.id}
+    %{id: user.id, data: event.data}
   end
 end
