@@ -7,7 +7,7 @@ defmodule Elixirmixpanel.EventController do
   plug :action
 
   def index(conn, _params) do
-    events = Repo.all(Event)
+    events = Event |> Repo.all |> Repo.preload [:user]
     render(conn, :index, events: events)
   end
 
