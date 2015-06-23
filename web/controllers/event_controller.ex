@@ -2,6 +2,7 @@ defmodule Elixirmixpanel.EventController do
   use Elixirmixpanel.Web, :controller
 
   alias Elixirmixpanel.Event
+  alias Elixirmixpanel.User
 
   plug :scrub_params, "event" when action in [:create, :update]
   plug :action
@@ -12,7 +13,14 @@ defmodule Elixirmixpanel.EventController do
   end
 
   def create(conn, %{"event" => event_params}) do
-    changeset = Event.changeset(%Event{}, event_params)
+    # changeset = Event.changeset(%Event{}, event_params)
+    IO.puts "============================"
+    IO.inspect event_params[:user_id]
+    IO.inspect Repo.all(User)
+    IO.puts "============================"
+    user = Repo.get(User, event_params[:user_id])
+    changeset = build(user, :events) |> Event.changeset(event_params)
+
 
     if changeset.valid? do
       event = Repo.insert(changeset)
