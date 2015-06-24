@@ -10,6 +10,12 @@ defmodule Elixirmixpanel.EventView do
   end
 
   def render("event.json", %{event: event}) do
-    %{id: event.id, name: event.name, user: event.user}
+    %{
+      id: event.id,
+      name: event.name,
+      user: %{
+          identifier: event.user.identifier
+        }
+    }
   end
 end

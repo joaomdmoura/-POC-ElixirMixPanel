@@ -33,7 +33,7 @@ defmodule Elixirmixpanel.EventController do
   end
 
   def show(conn, %{"id" => id}) do
-    event = Repo.get(Event, id)
+    event = Repo.get(Event, id) |> Repo.preload [:user]
     render conn, "show.json", event: event
   end
 
