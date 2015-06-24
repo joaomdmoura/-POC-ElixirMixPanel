@@ -9,8 +9,8 @@ defmodule Elixirmixpanel.User do
     timestamps
   end
 
-  @required_fields ~w(identifier data)
-  @optional_fields ~w()
+  @required_fields ~w(identifier)
+  @optional_fields ~w(data)
 
   @doc """
   Creates a changeset based on the `model` and `params`.

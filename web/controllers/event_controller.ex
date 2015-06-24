@@ -13,14 +13,14 @@ defmodule Elixirmixpanel.EventController do
   end
 
   def create(conn, %{"event" => event_params}) do
-    # changeset = Event.changeset(%Event{}, event_params)
-    IO.puts "============================"
-    IO.inspect event_params[:user_id]
-    IO.inspect Repo.all(User)
-    IO.puts "============================"
-    user = Repo.get(User, event_params[:user_id])
-    changeset = build(user, :events) |> Event.changeset(event_params)
+    user = Repo.get(User, event_params["user"]["identifier"])
 
+    if !user do
+      changeset = User.changeset(%User{}, event_params["user"])
+      user = Repo.insert(changeset)
+    end
+
+    changeset = build(user, :events) |> Event.changeset(event_params)
 
     if changeset.valid? do
       event = Repo.insert(changeset)
