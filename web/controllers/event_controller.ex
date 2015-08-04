@@ -5,7 +5,6 @@ defmodule Elixirmixpanel.EventController do
   alias Elixirmixpanel.User
 
   plug :scrub_params, "event" when action in [:create, :update]
-  plug :action
 
   def index(conn, _params) do
     events = Event |> Repo.all |> Repo.preload [:user]

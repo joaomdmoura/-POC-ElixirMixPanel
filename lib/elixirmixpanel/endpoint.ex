@@ -31,5 +31,5 @@ defmodule Elixirmixpanel.Endpoint do
     key: "_elixirmixpanel_key",
     signing_salt: "r5/yr9cx"
 
-  plug :router, Elixirmixpanel.Router
+  plug Elixirmixpanel.Router
 end
