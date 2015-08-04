@@ -33,3 +33,15 @@ config :elixirmixpanel, Elixirmixpanel.Repo,
   # password: "postgres",
   database: "elixirmixpanel_dev",
   size: 10 # The amount of database connections in the pool
+
+# Openmaize authentication library configuration
+config :openmaize,
+  user_model: Elixirmixpanel.Admin,
+  repo: Elixirmixpanel.Repo,
+  crypto: :bcrypt,
+  login_dir: "/admin",
+  redirect_pages: %{"admin" => "/admin", nil => "/"},
+  protected: %{"/admin" => ["admin"]},
+  secret_key: "youwillneverguess",
+  token_info: [:email],
+  token_validity: 600

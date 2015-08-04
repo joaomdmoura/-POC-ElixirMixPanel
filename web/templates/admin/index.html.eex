@@ -1,0 +1,28 @@
+<div class="jumbotron">
+  <h2>Hi, <%= @current_user[:name] %>, how's it hanging?</h2>
+</div>
+
+<h2>Listing users</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Role</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for user <- @users do %>
+    <tr>
+      <td><%= user.name %></td>
+      <td><%= user.role %></td>
+
+      <td class="text-right">
+        <%= link "Delete", to: admin_path(@conn, :delete, user), method: :delete, class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>

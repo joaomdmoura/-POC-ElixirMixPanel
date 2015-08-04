@@ -6,6 +6,13 @@ defmodule Elixirmixpanel.Router do
     plug :fetch_session
     plug :fetch_flash
     plug :protect_from_forgery
+    plug Openmaize.LoginoutCheck
+    plug Openmaize.Authenticate
+  end
+
+  pipeline :authorize do
+    plug Openmaize.Authorize
+    plug Openmaize.IdCheck
   end
 
   pipeline :api do
@@ -14,7 +21,7 @@ defmodule Elixirmixpanel.Router do
 
   scope "/", Elixirmixpanel do
     pipe_through :browser
-    get "/", EventController, :index
+    get "/", EventController, :index, as: :root
   end
 
   scope "/api", Elixirmixpanel do
@@ -22,5 +29,19 @@ defmodule Elixirmixpanel.Router do
 
     resources "/events", EventController
     resources "/users", UserController
+  end
+
+  scope "/admin", Elixirmixpanel do
+    pipe_through [:browser, :authorize]
+
+    get "/", AdminController, :index
+    get "/login", AdminController, :login, as: :login
+    post "/login", AdminController, :login_user, as: :login
+    get "/logout", AdminController, :logout, as: :logout
+  end
+
+  scope "/admin", Elixirmixpanel do
+    pipe_through :browser
+    resources "/users", AdminController, only: [:new, :create, :delete]
   end
 end
